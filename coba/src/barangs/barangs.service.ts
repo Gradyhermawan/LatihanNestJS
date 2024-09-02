@@ -26,8 +26,13 @@ export class BarangsService {
     return `This action returns a #${id} barang`;
   }
 
-  update(id: number, updateBarangDto: UpdateBarangDto) {
-    return `This action updates a #${id} barang`;
+  async update(id: number, updateBarangDto: UpdateBarangDto) {
+    // return `This action updates a #${id} barang`;
+    const toUpdate = await this.barangRepository.findOne({ where: { id } });
+
+    const updated = Object.assign(toUpdate, updateBarangDto);
+
+    return await this.barangRepository.save(updated);
   }
 
   async remove(id: number) {
