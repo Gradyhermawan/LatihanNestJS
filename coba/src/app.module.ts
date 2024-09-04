@@ -6,6 +6,10 @@ import { UserModule } from './user/user.module';
 import { User } from './user/entities/user.entity';
 import { BarangsModule } from './barangs/barangs.module';
 import { Barang } from './barangs/entities/barang.entity';
+import { KayuModule } from './kayu/kayu.module';
+import { Kayu } from './kayu/entities/kayu.entity';
+import { SepatuModule } from './sepatu/sepatu.module';
+import { Sepatu } from './sepatu/entities/sepatu.entity';
 
 @Module({
   imports: [
@@ -16,11 +20,13 @@ import { Barang } from './barangs/entities/barang.entity';
       username: 'root',
       password: '',
       database: 'coba',
-      entities: [User,Barang],
+      entities: [User,Barang,Kayu,Sepatu],
       synchronize: true,
     }),
     UserModule,
     BarangsModule,
+    KayuModule,
+    SepatuModule,
   ],
   controllers: [AppController],
   providers: [AppService],
