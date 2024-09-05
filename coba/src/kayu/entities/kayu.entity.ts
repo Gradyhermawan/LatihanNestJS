@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Bahan } from "src/bahan/entities/bahan.entity";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 @Entity()
 export class Kayu {
     @PrimaryGeneratedColumn()
@@ -18,4 +19,8 @@ export class Kayu {
 
     @Column('date')
     arrived_date: Date;
+
+    // @Column('int')
+    @OneToMany(() => Bahan, (bahan) => bahan.kayu)
+    bahan: Bahan[];
 }

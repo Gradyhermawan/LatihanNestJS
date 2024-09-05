@@ -17,19 +17,27 @@ export class KayuService {
   }
 
   async findAll() {
-    return await this.kayuRepository.find();
+    // return await this.kayuRepository.find();
     // return `This action returns all kayu`; 
+    return await this.kayuRepository
+    .createQueryBuilder("kayu")
+    .leftJoinAndSelect("kayu.bahan", "bahan")
+    .getMany()
   }
 
   findOne(id: number) {
     return `This action returns a #${id} kayu`;
   }
 
-  update(id: number, updateKayuDto: UpdateKayuDto) {
-    return `This action updates a #${id} kayu`;
+  async update(id: number, updateKayuDto: UpdateKayuDto) {
+    const toUpdate = await this.kayuRepository.findOne({ where: { id } });
+
+    const updated = Object.assign(toUpdate, updateKayuDto);
+
+    return await this.kayuRepository.save(updated);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} kayu`;
+  async remove(id: number) {
+    return await this.kayuRepository.delete(id);
   }
 }

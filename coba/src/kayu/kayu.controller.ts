@@ -25,6 +25,9 @@ export class KayuController {
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateKayuDto: UpdateKayuDto) {
+    updateKayuDto["length"]=parseInt(updateKayuDto["length"]);
+    updateKayuDto["diameter"]=parseInt(updateKayuDto["diameter"]);
+    updateKayuDto["id"]=parseInt(updateKayuDto["id"]);
     return this.kayuService.update(+id, updateKayuDto);
   }
 
